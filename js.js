@@ -1,3 +1,34 @@
+// ===== БУРГЕР-МЕНЮ =====
+const burgerMenu = document.querySelector('.burger-menu');
+const navLinks = document.querySelector('.nav-links');
+const body = document.body;
+
+if (burgerMenu) {
+    burgerMenu.addEventListener('click', () => {
+        burgerMenu.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            burgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+
+    // Закрытие меню при клике на затемненный фон
+    body.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') && !e.target.closest('.nav-links') && !e.target.closest('.burger-menu')) {
+            burgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
+}
+
 // ===== Плавная прокрутка к якорям =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
